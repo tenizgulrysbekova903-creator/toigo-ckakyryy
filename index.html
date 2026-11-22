@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Улан & Толкунай | Тойго чакыруу</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #fbf6ef;
+  color: #59452f;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.intro {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 15px;
+  background: radial-gradient(
+    ellipse at center,
+    #fffdf9,
+    #f8f0e5
+  );
+}
+
+.intro-inner {
+  max-width: 600px;
+}
+
+.ornament {
+  color: #b58a4c;
+  font-size: 28px;
+  margin: 20px;
+}
+
+.intro h1 {
+  font-size: clamp(48px, 10vw, 80px);
+  color: #a77b3d;
+  font-weight: normal;
+  font-style: italic;
+  line-height: 1.15;
+}
+
+.intro p {
+  font-size: 19px;
+  line-height: 1.7;
+  color: #8b6b43;
+}
+
+button {
+  padding: 14px 28px;
+  border: 1px solid #b58a4c;
+  border-radius: 30px;
+  background: #fffaf3;
+  color: #76572f;
+  font-family: inherit;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.music-btn {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 10;
+  padding: 11px 17px;
+  font-size: 14px;
+}
+
+main {
+  padding: 40px 15px;
+}
+
+.section {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.section img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddc69d;
+  box-shadow: 0 10px 25px #6c4c2118;
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #87602d;
+  font-size: 18px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 15px 90px;
+  color: #927b5e;
+}
+
+.fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: .8s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop preload="auto">
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn">
+  ♫ Музыканы күйгүзүү
+</button>
+
+<header class="intro">
+
+  <div class="intro-inner">
+
+    <div class="ornament">❦</div>
+
+    <p>Сиздерди биздин кубанычтуу күнүбүзгө чакырабыз</p>
+
+    <h1>
+      Улан<br>
+      &amp;<br>
+      Толкунай
+    </h1>
+
+    <p>3-декабрь · 16:00</p>
+
+    <button id="openBtn">
+      Чакырууну ачуу
+    </button>
+
+    <div class="ornament">♡</div>
+
+  </div>
+
+</header>
+
+<main id="invitation">
+
+  <!-- 1. Улан жана Толкунай -->
+
+  <section class="section fade">
+    <img
+      src="assets/01-names-ulan-tolkunai.png"
+      alt="Улан жана Толкунай"
+    >
+  </section>
+
+  <!-- 2. Чакыруу тексти -->
+
+  <section class="section fade">
+    <img
+      src="assets/02-invitation-text.png"
+      alt="Урматтуу коноктор"
+    >
+  </section>
+
+  <!-- 3. Той күнү жана убактысы -->
+
+  <section class="section fade">
+    <img
+      src="assets/03-date-time.png"
+      alt="3-декабрь, саат 16:00"
+    >
+  </section>
+
+  <!-- 4. Тойдун дареги -->
+
+  <section class="section fade">
+
+    <img
+      src="assets/04-address.png"
+      alt="Балыкчы шаары, Айдаркен кафеси"
+    >
+
+    <a
+      class="map-link"
+      href="https://www.google.com/maps/search/?api=1&query=Айдаркен%20кафеси%20Балыкчы"
+      target="_blank"
+      rel="noopener"
+    >
+      Даректи картадан көрүү ↗
+    </a>
+
+  </section>
+
+  <!-- 5. Той ээлери -->
+
+  <section class="section fade">
+    <img
+      src="assets/05-hosts-akylbek-gulbara.png"
+      alt="Урматтоо менен той ээлери Акылбек жана Гулбара"
+    >
+  </section>
+
+</main>
+
+<footer>
+  Улан &amp; Толкунай · 3-декабрь
+</footer>
+
+<script>
+
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
+
+musicBtn.addEventListener("click", async () => {
+
+  if (music.paused) {
+
+    try {
+      await music.play();
+      musicBtn.textContent = "♫ Музыканы токтотуу";
+    } catch (error) {
+      musicBtn.textContent = "Музыка ачылган жок";
+    }
+
+  } else {
+
+    music.pause();
+    musicBtn.textContent = "♫ Музыканы күйгүзүү";
+
+  }
+
+});
+
+document.getElementById("openBtn")
+.addEventListener("click", async () => {
+
+  if (music.paused) {
+    try {
+      await music.play();
+      musicBtn.textContent = "♫ Музыканы токтотуу";
+    } catch (error) {}
+  }
+
+  document.getElementById("invitation")
+  .scrollIntoView({
+    behavior: "smooth"
+  });
+
+});
+
+const sections = document.querySelectorAll(".fade");
+
+if ("IntersectionObserver" in window) {
+
+  const observer = new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("show");
+
+          observer.unobserve(entry.target);
+
+        }
+
+      });
+
+    },
+    { threshold: 0.12 }
+  );
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+} else {
+
+  sections.forEach(section => {
+    section.classList.add("show");
+  });
+
+}
+
+</script>
+
+</body>
+</html>
